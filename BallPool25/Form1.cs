@@ -19,113 +19,140 @@ namespace BallPool25
         }
 
         private void button1_Click(object sender, EventArgs e)
+
         {
-            double efficiency = 0.64;
+            int empty = 0;
 
-            // FIND NUMBER OF BALLS
+            if (textBox1.Text == "")
+                empty = empty + 1;
+
+            if (textBox2.Text == "")
+                empty = empty + 1;
+
+            if (textBox3.Text == "")
+                empty = empty + 1;
+
+            if (RadBallBox.Text == "")
+                empty = empty + 1;
+
             if (NumBallsBox.Text == "")
+                empty = empty + 1;
+
+            if (empty != 1)
             {
-                double Length = double.Parse(textBox1.Text);
-                double Width = double.Parse(textBox2.Text);
-                double Depth = double.Parse(textBox3.Text);
-                double BallRadius = double.Parse(RadBallBox.Text);
-
-                double VolumeOfPool = Length * Width * Depth;
-                double VolumeOfBall =
-                    (4.0 / 3.0) * Math.PI * Math.Pow(BallRadius, 3);
-
-                double NumOfBalls =
-                    (VolumeOfPool * efficiency) / VolumeOfBall;
-
-                NumBallsBox.Text = Math.Floor(NumOfBalls).ToString();
+                MessageBox.Show("Please leave exactly one box empty.");
+                return;
             }
 
-            // FIND BALL RADIUS
-            else if (RadBallBox.Text == "")
             {
-                double Length = double.Parse(textBox1.Text);
-                double Width = double.Parse(textBox2.Text);
-                double Depth = double.Parse(textBox3.Text);
-                double NumOfBalls = double.Parse(NumBallsBox.Text);
+                double efficiency = 0.64;
 
-                double VolumeOfPool = Length * Width * Depth;
 
-                double VolumeOfBall =
-                    (VolumeOfPool * efficiency) / NumOfBalls;
+                // number of balls
+                if (NumBallsBox.Text == "")
+                {
+                    double Length = double.Parse(textBox1.Text);
+                    double Width = double.Parse(textBox2.Text);
+                    double Depth = double.Parse(textBox3.Text);
+                    double BallRadius = double.Parse(RadBallBox.Text);
 
-                double BallRadius =
-                    Math.Pow(
-                        (3 * VolumeOfBall) / (4 * Math.PI),
-                        1.0 / 3.0
-                    );
+                    double VolumeOfPool = Length * Width * Depth;
+                    double VolumeOfBall =
+                        (4.0 / 3.0) * Math.PI * Math.Pow(BallRadius, 3);
 
-                RadBallBox.Text = Math.Round(BallRadius, 2).ToString();
-            }
+                    double NumOfBalls =
+                        (VolumeOfPool * efficiency) / VolumeOfBall;
 
-            // FIND LENGTH
-            else if (textBox1.Text == "")
-            {
-                double Width = double.Parse(textBox2.Text);
-                double Depth = double.Parse(textBox3.Text);
-                double BallRadius = double.Parse(RadBallBox.Text);
-                double NumOfBalls = double.Parse(NumBallsBox.Text);
+                    NumBallsBox.Text = Math.Floor(NumOfBalls).ToString();
+                }
 
-                double VolumeOfBall =
-                    (4.0 / 3.0) * Math.PI * Math.Pow(BallRadius, 3);
+                // Ball radius
+                else if (RadBallBox.Text == "")
+                {
+                    double Length = double.Parse(textBox1.Text);
+                    double Width = double.Parse(textBox2.Text);
+                    double Depth = double.Parse(textBox3.Text);
+                    double NumOfBalls = double.Parse(NumBallsBox.Text);
 
-                double VolumeOfPool =
-                    (NumOfBalls * VolumeOfBall) / efficiency;
+                    double VolumeOfPool = Length * Width * Depth;
 
-                double Length =
-                    VolumeOfPool / (Width * Depth);
+                    double VolumeOfBall =
+                        (VolumeOfPool * efficiency) / NumOfBalls;
 
-                textBox1.Text = Math.Round(Length, 2).ToString();
-            }
+                    double BallRadius =
+                        Math.Pow(
+                            (3 * VolumeOfBall) / (4 * Math.PI),
+                            1.0 / 3.0
+                        );
 
-            // FIND WIDTH
-            else if (textBox2.Text == "")
-            {
-                double Length = double.Parse(textBox1.Text);
-                double Depth = double.Parse(textBox3.Text);
-                double BallRadius = double.Parse(RadBallBox.Text);
-                double NumOfBalls = double.Parse(NumBallsBox.Text);
+                    RadBallBox.Text = Math.Round(BallRadius, 2).ToString();
+                }
 
-                double VolumeOfBall =
-                    (4.0 / 3.0) * Math.PI * Math.Pow(BallRadius, 3);
+                // calculates length
+                else if (textBox1.Text == "")
+                {
+                    double Width = double.Parse(textBox2.Text);
+                    double Depth = double.Parse(textBox3.Text);
+                    double BallRadius = double.Parse(RadBallBox.Text);
+                    double NumOfBalls = double.Parse(NumBallsBox.Text);
 
-                double VolumeOfPool =
-                    (NumOfBalls * VolumeOfBall) / efficiency;
+                    double VolumeOfBall =
+                        (4.0 / 3.0) * Math.PI * Math.Pow(BallRadius, 3);
 
-                double Width =
-                    VolumeOfPool / (Length * Depth);
+                    double VolumeOfPool =
+                        (NumOfBalls * VolumeOfBall) / efficiency;
 
-                textBox2.Text = Math.Round(Width, 2).ToString();
-            }
+                    double Length =
+                        VolumeOfPool / (Width * Depth);
 
-            // FIND DEPTH
-            else if (textBox3.Text == "")
-            {
-                double Length = double.Parse(textBox1.Text);
-                double Width = double.Parse(textBox2.Text);
-                double BallRadius = double.Parse(RadBallBox.Text);
-                double NumOfBalls = double.Parse(NumBallsBox.Text);
+                    textBox1.Text = Math.Round(Length, 2).ToString();
+                }
 
-                double VolumeOfBall =
-                    (4.0 / 3.0) * Math.PI * Math.Pow(BallRadius, 3);
+                // Calculates Width
+                else if (textBox2.Text == "")
+                {
+                    double Length = double.Parse(textBox1.Text);
+                    double Depth = double.Parse(textBox3.Text);
+                    double BallRadius = double.Parse(RadBallBox.Text);
+                    double NumOfBalls = double.Parse(NumBallsBox.Text);
 
-                double VolumeOfPool =
-                    (NumOfBalls * VolumeOfBall) / efficiency;
+                    double VolumeOfBall =
+                        (4.0 / 3.0) * Math.PI * Math.Pow(BallRadius, 3);
 
-                double Depth =
-                    VolumeOfPool / (Length * Width);
+                    double VolumeOfPool =
+                        (NumOfBalls * VolumeOfBall) / efficiency;
 
-                textBox3.Text = Math.Round(Depth, 2).ToString();
-            }
+                    double Width =
+                        VolumeOfPool / (Length * Depth);
 
-            // NOTHING IS EMPTY
-            else
-            {
-                MessageBox.Show("Please leave at least one box empty.");
+                    textBox2.Text = Math.Round(Width, 2).ToString();
+                }
+
+                // Calculates Depth
+                else if (textBox3.Text == "")
+                {
+                    double Length = double.Parse(textBox1.Text);
+                    double Width = double.Parse(textBox2.Text);
+                    double BallRadius = double.Parse(RadBallBox.Text);
+                    double NumOfBalls = double.Parse(NumBallsBox.Text);
+
+                    double VolumeOfBall =
+                        (4.0 / 3.0) * Math.PI * Math.Pow(BallRadius, 3);
+
+                    double VolumeOfPool =
+                        (NumOfBalls * VolumeOfBall) / efficiency;
+
+                    double Depth =
+                        VolumeOfPool / (Length * Width);
+
+                    textBox3.Text = Math.Round(Depth, 2).ToString();
+                }
+
+                // 2 or more boxes are empty
+                else
+                {
+                    MessageBox.Show("Please leave at least one box empty.");
+                }
             }
         }
 
